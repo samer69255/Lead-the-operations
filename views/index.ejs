@@ -1,0 +1,83 @@
+<html class="metro-no-touch-device"><head>
+<title></title>
+
+<link rel="stylesheet" href="./css/metro-all.min.css">
+<link rel="stylesheet" href="./css/main.css">
+
+<script src="./js/jquery-3.3.1.min.js"></script>
+<script src="./js/metro.min.js"></script>
+<script src="./js/functions.js"></script>
+<script src="./js/socket.io.dev.js"></script>
+<style></style>
+
+</head>
+
+<body class="bg-dark fg-white"><div class="notify-container"></div>
+
+    <div class="container-fluid start-screen no-overflow">
+        <h1 class="start-screen-title">Start</h1>
+
+        <div class="tiles-area" style="width: 1520px;">
+
+
+
+
+
+
+            <div class="tiles-grid tiles-group size-2 fg-white" data-group-title="Games" style="left: 0px;">
+                <div data-role="tile" data-cover="./icons/periergafain1.jpg" class="tile-medium attk" style="background-image: url(./icons/periergafain1.jpg); background-size: cover; background-repeat: no-repeat; opacity: 1; transform: scale(1); transition: 0.3s;">
+                    <span class="branding-bar">برق</span>
+                </div>
+                <div data-role="tile" class="tile-medium rpg" style="background-image: url(./icons/RPG.jpg); background-size: cover; background-repeat: no-repeat;  opacity: 1; transform: scale(1); transition: 0.3s;">
+                    <span class="branding-bar">آر بي جي</span>
+                </div>
+                <div data-role="tile" data-size="wide" data-cover="./icons/SWAT.jpg" class="tile-wide attk" style="background-image: url(./icons/SWAT.jpg); background-size: cover; background-repeat: no-repeat; opacity: 1; transform: scale(1); transition: 0.3s;">
+                    <span class="branding-bar">هجوم عنيف</span>
+                    <span class="badge-top">5</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="dialog" data-role="dialog" id="rpg1">
+    <div class="dialog-title" style="text-align: right;">آر بي جي</div>
+    <div class="dialog-content">
+      <input type="text" class="right secondary" id="server" placeholder="عنوان السيرفر"><br>
+      <div class="cell-md-5" style="text-align: right; left:17vw;">
+            <input type="text" class="right secondary Numeric" id="b_n" placeholder="عدد الضربات">
+        </div>
+    </div>
+    <div class="dialog-actions">
+        <button class="button js-dialog-close">الغاء</button>
+        <button class="button alert rpg_b secondary" data-id="1">ضرب</button>
+    </div>
+</div>
+
+<div class="dialog" data-role="dialog" id="brq1">
+<div class="dialog-title" style="text-align: right;">برق</div>
+<div class="dialog-content">
+  <input type="text" class="right info" id="server" placeholder="عنوان السيرفر"><br>
+
+</div>
+<div class="dialog-actions">
+    <button class="button js-dialog-close">الغاء</button>
+    <button class="button info drop-shadow brq_b secondary" data-id="1">ضرب</button>
+</div>
+</div>
+
+
+<script src="./js/main.js"></script>
+
+<script>
+var socket = io();
+
+socket.on('message',function (data) {
+  console.log(data);
+});
+</script>
+
+
+
+
+</body></html>
